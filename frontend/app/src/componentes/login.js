@@ -2,6 +2,22 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import md5 from 'md5';
 
+function formatCPF(value) {
+    // Remove qualquer caractere que não seja número
+    value = value.replace(/\D/g, '');
+
+    // Adiciona pontos e hífen conforme necessário
+    if (value.length > 9) {
+        value = value.replace(/^(\d{3})(\d{3})(\d{3})(\d{2})$/, '$1.$2.$3-$4');
+    } else if (value.length > 6) {
+        value = value.replace(/^(\d{3})(\d{3})(\d{3})/, '$1.$2.$3');
+    } else if (value.length > 3) {
+        value = value.replace(/^(\d{3})(\d{3})/, '$1.$2');
+    }
+
+    return value;
+}
+
 function Login() {
     const [cpf, setCPF] = useState('');
     const [password, setPassword] = useState('');
