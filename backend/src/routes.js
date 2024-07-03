@@ -34,4 +34,31 @@ router.post('/login', async (req, res) => {
     }
 });
 
+router.post('/recurses', async (req, res) => {
+    const userId = req.body;
+
+    // Consulta SQL para verificar as permissões
+    const query = `SELECT id, cpf, senha FROM usuarios WHERE cpf = ? AND senha = ?`;
+    try {
+        const results = await db.executeQuery(query, [cpf, password]); 
+        if (results.length > 0) {
+
+            const user=results[0];
+
+            return res.json({ 
+                message: 'Login realizado com sucesso',
+                id: user.id,
+                message: 'id'
+             });
+            
+        } else {
+            return res.status(401).json({ error: 'Credenciais inválidas' });
+        }
+    } catch (error) {
+        console.error('Erro ao buscar usuário:', error);
+        return res.status(500).json({ error: 'Erro interno ao buscar usuário.' });
+    }
+});
+
+
 module.exports = router;
