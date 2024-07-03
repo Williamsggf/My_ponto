@@ -38,6 +38,11 @@ function Login() {
         }
     };
 
+    const handleCPFChange = (e) => {
+        const formattedCPF = formatCPF(e.target.value);
+        setCPF(formattedCPF);
+    };
+
     return (
         <div className='login-form-wrap'>
             <h2>Login</h2>
@@ -48,7 +53,7 @@ function Login() {
                     placeholder='CPF'
                     required
                     value={cpf}
-                    onChange={(e) => setCPF(e.target.value)}
+                    onChange={handleCPFChange}
                 />
                 <input
                     type='password'
