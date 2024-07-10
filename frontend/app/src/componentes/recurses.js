@@ -1,34 +1,61 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
-function Recursos() {
-    const [userId, setUserId] = useState('');
-    const [loading, setLoading] = useState(true); // Pode iniciar com true para carregar o ID do usuário
+function Recurses() {
+    const [userId, setUserId] = useState(null);
+    const [nome, setNome] = useState('');
+
+    // Definindo os estados para os recursos
+    const [ponto, setPonto] = useState(false);
+    const [cadastro, setCadastro] = useState(false);
+    const [relatorio, setRelatorio] = useState(false);
+    const [indicadores, setIndicadores] = useState(false);
 
     useEffect(() => {
-        // Recuperar o ID do usuário armazenado localmente (por exemplo, usando localStorage)
-        const storedUserId = localStorage.getItem('userId');
-        if (storedUserId) {
-            setUserId(storedUserId);
-        }
-        setLoading(false); // Finaliza o carregamento após recuperar o ID do usuário
+        const userIdFromStorage = Number(localStorage.getItem('userId'));
+        const nomeFromStorage = localStorage.getItem('nome');
+        const pontoFromStorage = Number(localStorage.getItem('ponto')) === 1;
+        const cadastroFromStorage = Number(localStorage.getItem('cadastro')) === 1;
+        const relatorioFromStorage = Number(localStorage.getItem('relatorio')) === 1;
+        const indicadoresFromStorage = Number(localStorage.getItem('indicadores')) === 1;
+
+        setUserId(userIdFromStorage);
+        setNome(nomeFromStorage || '');  // Garantindo que nome seja inicializado corretamente
+        setPonto(pontoFromStorage);
+        setCadastro(cadastroFromStorage);
+        setRelatorio(relatorioFromStorage);
+        setIndicadores(indicadoresFromStorage);
     }, []);
 
-    // Lógica para carregar recursos baseados no ID do usuário, se necessário
-
     return (
-        <div className='recursos-page'>
-            <h2>Recursos Disponíveis</h2>
-            {loading ? (
-                <p>Carregando...</p>
-            ) : (
-                <div>
-                    <p>Seu ID de usuário: {userId}</p>
-                    {/* Aqui você pode adicionar lógica adicional baseada no ID do usuário */}
-                </div>
-            )}
+        <div>
+            <h2>Bem-vindo à página de recursos</h2>
+            <p>Olá {nome}, o que gostaria de fazer?</p>
+            <ul>
+                {ponto && 
+                        <Link to="/Registropt">
+                            <button className="btn-app">Registrar Ponto</button>
+                        </Link>
+                }
+                {cadastro && 
+                    <Link to="/Cadastro">
+                            <button className="btn-app">Cadastrar Usuário</button>
+                    </Link>
+                    }
+                {relatorio && 
+                        <Link to="/Relatorios">
+                            <button className="btn-app">Gerar Relatórios</button>
+                        </Link>
+                }
+                {indicadores && 
+                        <Link to="/Indicadores">
+                            <button className="btn-app">Verificar Indicadores</button>
+                        </Link>
+
+                }
+            </ul>
         </div>
     );
 }
 
-export default Recursos;
+export default Recurses;

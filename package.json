@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "expo-updates": "~0.25.18",
+    "react-router-dom": "^6.24.1"
+  }
+}

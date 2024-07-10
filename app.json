@@ -1,0 +1,22 @@
+{
+  "expo": {
+    "extra": {
+      "eas": {
+        "projectId": "28cec5f4-ca59-4efb-afa1-7cdfb8333b68"
+      }
+    },
+    "android": {
+      "package": "com.devwgconsultec.my_ponto"
+    },
+    "ios": {
+      "bundleIdentifier": "1.00"
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/28cec5f4-ca59-4efb-afa1-7cdfb8333b68"
+    },
+    "plataforms": ["APK", "android"] 
+  }
+}
