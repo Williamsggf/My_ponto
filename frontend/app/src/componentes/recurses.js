@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 function Recurses() {
-    const [userId, setUserId] = useState(null);
     const [nome, setNome] = useState('');
+    const [userId, setUserId] = useState(0);
 
     // Definindo os estados para os recursos
     const [ponto, setPonto] = useState(false);

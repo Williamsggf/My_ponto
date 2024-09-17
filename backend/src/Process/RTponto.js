@@ -40,7 +40,7 @@ router.post('/CTPonto', async (req, res) => {
 });
 
 router.post('/RGPonto', async (req, res) => {
-    const { userId, data, tp_reg, forma, hora } = req.body;
+    const { userId, data, tp_reg, forma, hora, latitude, longitude, ip, ipv4 } = req.body;
 
     if (!userId || !data) {
         return responderComErro(res, 400, 'Usuário e data são obrigatórios');
@@ -48,11 +48,11 @@ router.post('/RGPonto', async (req, res) => {
 
     // Inserir um novo registro de ponto
     const insertQuery = `
-        INSERT INTO registro_ponto (usuario, dt_ponto, tp_reg, forma, hora )
-        VALUES (?, ?, ?, ?, ?)
+        INSERT INTO registro_ponto (usuario, dt_ponto, tp_reg, forma, hora, latitude, longitude, ip, ipv4 )
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
     `;
 
-    const insertValues = [userId, data, tp_reg, forma, hora];
+    const insertValues = [userId, data, tp_reg, forma, hora, latitude, longitude, ip, ipv4];
 
     try {
         await db.executeQuery(insertQuery, insertValues)
